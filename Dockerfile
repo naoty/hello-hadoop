@@ -10,4 +10,6 @@ RUN mkdir /run/sshd \
 RUN wget -q -O - http://ftp.yz.yamagata-u.ac.jp/pub/network/apache/hadoop/common/hadoop-3.2.1/hadoop-3.2.1.tar.gz | tar zxf -
 ENV PATH=/hadoop-3.2.1/bin:/hadoop-3.2.1/sbin:$PATH
 COPY config /hadoop-3.2.1/etc/hadoop/
-CMD ["/usr/sbin/sshd"]
+RUN hdfs namenode -format
+COPY start /
+CMD ["/start"]
